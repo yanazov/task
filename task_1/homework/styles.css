@@ -1,0 +1,21 @@
+#btn-random-color{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    background-color: #777;
+    color: #fff;
+    text-decoration: none;
+}
+
+#btn-random-color:hover{
+    background-color: #999;
+}
+
+#color-value{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
