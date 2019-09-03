@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 2: CLASSWORK 2</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="testBlock hover">
+      <button class="iButton" id="mouseHover">1. Hover!</button>
+      <ul id="hoverResult" class="resultBlock">
+        <li class="red">Hovered!</li>
+        <li class="blue">Hovered!</li>
+      </ul>
+    </div>
+
+    <div class="testBlock click">
+      <button class="iButton" id="mouseClick">2. Click for do things</button>
+      <div id="clickResult" class="resultBlock one two three four five six"></div>
+    </div>
+
+    <div class="testBlock random">
+      <button class="iButton" id="mouseLight">3. Click for turn on lights</button>
+      <div id="lightResult" class="resultBlock"></div>
+    </div>
+
+    <div class="testBlock keyboard">
+      <button class="iButton" id="keyboardButton">4. Press any key</button>
+      <div id="keyboardResult" class="resultBlock key-colors"></div>
+    </div>
+
+  </div>
+
+  <script>
+    /*
+
+      Поработаем немного с ивентами:
+      onmouseenter
+      onclick
+      oncontextmenu
+      onkeydown
+
+      Задание:
+      На каждую из конопок назначить действие которое будет выполнять следующее действие:
+      1.На ховер(onmouseenter) повесить обработчик который будет при каждом наведении
+        на кнопку будет выводить в блок результатом елемент li с текстом "hovered!"
+        у которого будет один из следующих класов:
+        red blue green orange purple
+
+      2.На кнопку клика (onclick) повесить обработчик который будет удалять классы с
+        блока с результатом по очереди в таком порядке:
+
+        six > two > three > four > one > five
+        после того как блок окажется пустым, добавить их в порядке возрастания
+        one > two > three ... > six
+
+      3. На кнопку клика (Light) повесить обработчик, который будет выводить в 
+      блок с результатом (lightResult) поочередно один из цветов светофора:
+      Цикл: Off -> Red -> Yellow -> Green -> Off
+
+      4. На кнопку с обработчиком нажатия (onkeydown) повесить обработчик который будет:
+
+        - Выводить в блок с результатом(keyboardResult) число нажатий на любую из клавиш клавиатуры.
+        - Давать блоку (keyboardResult) классы, которые соотсветствуют числу кликов:
+
+        Н-р:
+        1 -> one
+        3 -> three
+        5 -> five
+        11 -> one one
+        115 -> one one five
+
+
+
+    */
+
+    var mouseHover = document.getElementById('mouseHover');
+    var mouseClick = document.getElementById('mouseClick');
+    var mouseLight = document.getElementById('mouseLight');
+    var keyboardButton = document.getElementById('keyboardButton');
+
+
+
+    
+
+    const color = ['red', 'blue', 'green', 'orange', 'purple'];
+    mouseHover.onmouseenter = function(){
+      let elem = document.createElement('li');
+      elem.className = color[Math.floor(Math.random() * (5))];
+      elem.innerHTML ='Hovered!';
+      document.getElementById('hoverResult').appendChild(elem);
+      console.log('hover');
+    }
+
+    var clickIndex = 0;
+    var direction = true;
+    const class_del = ['six', 'two', 'three', 'four','one','five'];
+    const class_add = ['one', 'two', 'three', 'four','five','six'];
+    let elem = document.getElementById('clickResult');
+
+    mouseClick.onclick = function(){
+      
+      
+      if(direction){
+        elem.classList.remove(class_del[clickIndex]);
+      } else {
+        elem.classList.add(class_add[clickIndex]);
+      }
+      clickIndex++;
+      if(elem.classList.length == 1){
+        direction = false;
+        clickIndex = 0;
+      }
+
+      console.log('click');
+    }
+
+    let color_light = ['Off','Red','Yellow','Green'];
+    const elem_light = document.getElementById('lightResult');
+    let i_light = 0;
+    mouseLight.onclick = function(e){
+      elem_light.innerHTML = color_light[i_light];
+      elem_light.classList.add(color_light[i_light]);
+      i_light++;
+      if(i_light > color_light.length - 1){
+        i_light = 0;
+      }
+
+      console.log('light');
+    }
+
+    const number_click = ['zero', 'one', 'two', 'three', 'four','five','six', 'seven', 'eight', 'nine'];
+    var counter = 0;
+    let counter_str, counter_words;
+    const elem_keydown = document.getElementById('keyboardResult');
+    keyboardButton.onkeydown = function(){
+      counter++;
+      counter_words = '';
+      counter_str = counter.toString();
+      for(let i = 0; i < counter_str.length; i++){
+        counter_words += number_click[counter_str[i]]+' ';
+      }
+      elem_keydown.classList = "resultBlock key-colors "+counter_words;
+      elem_keydown.innerHTML = counter_words;
+    }
+  </script>
+</body>
+</html>
