@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Forms Task 1</title>
+   <script>
+      /*
+         Задание:
+         Сделать валидацию формы:
+         1. Логин / Пароль не может быть пустым
+         2. Пароли должны совпадть
+         3. Пока не стоит что юзер согласен с лиц. соглашением - кнопка отправки не активна
+
+         + бонус - то поле, которое не прошло валидацию подсвечивать красным.
+                  - которое прошло - подсвечивать зеленым.
+      */
+      document.addEventListener("DOMContentLoaded", function(event) {     
+         document.getElementById('agree').addEventListener('click', function(e){
+            if(e.target.checked){
+               document.getElementById('submit').removeAttribute('disabled');
+            } else {
+               document.getElementById('submit').setAttribute('disabled', 'disabled');
+            }
+         });
+         
+         document.getElementById('submit').addEventListener('click', validate);
+        
+         var myForm = document.getElementById('MyValidateForm');
+         var login =  myForm.elements.login;
+         var password1 =  myForm.elements.pas1;
+         var password2 =  myForm.elements.pas2;
+
+         function validate(e){
+            e.preventDefault();
+            if( login.value != '' && password1.value != '' && password1.value === password2.value){
+               console.log('form valide!');
+            } else {
+               console.error('form not valide');
+               if(login.value == ''){
+                  login.classList.add('error');
+               }
+               if(password1.value != password2.value){
+                  password2.classList.add('error');
+               }
+            }
+         }; 
+      }); 
+   </script>
+</head>
+<body>
+   <form id="MyValidateForm">
+      <input type="text" name='login' placeholder="Ваш логин" />
+      <input type="password" name='pas1' placeholder="Ваш пароль" />
+      <input type="password" name='pas2' placeholder="Повторите пароль" />
+      <label for="agree">
+         <span>Вы согласны с лицензионым соглашением.</span>
+         <input type="checkbox" id="agree" />
+      </label>
+      <input type="submit" id="submit" value="Отправить" disabled/>
+   </form>
+
+   <style>
+      #MyValidateForm{
+         width: 350px;
+         display: flex;
+         flex-direction: column;
+      }
+
+      #MyValidateForm input{
+         margin-bottom: 10px;
+         box-sizing: border-box;
+         padding: 10px 20px;
+      }
+      .error{
+         border: 1px solid red;
+      }
+      .OK{
+         border: 1px solid green;
+      }
+   </style>
+</body>
+</html>

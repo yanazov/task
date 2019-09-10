@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>asdas</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <form id='myForm'>
+      <label>Имя</label>
+      <input type="text" required minlength = 2 placeholder="Как тебя зовут дружище?!">
+      <br>      
+      <label>Почта</label>
+      <input id='input_mail' type="email" required minlength = 3 >
+      <br>
+      <label>Пароль</label>
+      <input id='input_password' type="password" required minlength = 8 maxlength=16>
+      <br>
+
+
+      <br>
+      
+      
+      <button id='btnSubmit' type="submit">Submit</button>      
+      <button id='btnValidate'>Validate</button>
+    </form>
+    
+<!--
+
+  - Имя пользователя: type:text -> validation: required; minlength = 2;  
+            Если пустое выввести сообщение: "Как тебя зовут дружище?!"
+        - Email: type: email -> validation: required; minlength = 3; validEmail;
+            Если эмейл не валидный вывести сообщение "Ну и зря, не получишь бандероль с яблоками!"
+        - Пароль: type: password -> validation: required; minlength = 8; maxlength=16;
+            Если пустой вывести сообщение: "Я никому не скажу наш секрет";
+        - Количество сьеденых яблок: type: number -> validation: required; minlength = 1; validNumber;
+            Если количество 0 вывести эррор с сообщением "Ну хоть покушай немного... Яблочки вкусные"
+        - Напиши спасибо за яблоки: type: text -> validation: required; 
+            Если текст !== "спасибо" вывести эррор с сообщением "Фу, неблагодарный(-ая)!" используя setCustomValidity();
+
+        - Согласен на обучение: type: checkbox -> validation: required;
+            Если не выбран вывести эррор с сообщение: "Необразованные живут дольше! Хорошо подумай!"
+
+-->
+
+
+    
+    <script src="Task1.js"></script>
+  </body>
+</html>

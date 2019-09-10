@@ -1,0 +1,14 @@
+body{
+  box-sizing: border-box;
+  padding: 10px 20px 30px;
+  background: #eee;
+  font-family: sans-serif;
+}
+
+
+input:valid{
+  border-color: green;
+}
+input:invalid{
+  border-color: red;
+}
